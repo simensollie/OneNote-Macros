@@ -10,6 +10,6 @@ https://msdn.microsoft.com/en-us/library/xk24xdbe(v=vs.100).aspx
 # Produkter
 Macro for å legge til produkter med pris.
 ### TODO
-- [ ] QueryObjects to find existing Outline-object https://getonetastic.com/docs/Functions_Object_Functions_QueryObjects.html
+- [ ] Use QueryObjects to find existing Outline-object and insert table https://getonetastic.com/docs/Functions_Object_Functions_QueryObjects.html
 - [ ] Make it so that you don't need to insert value in all text fields
 - [ ] Create table with visible lines
