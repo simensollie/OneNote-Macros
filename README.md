@@ -1,7 +1,7 @@
 ## OneNote Macros
 Macros for OneNote
 ### Tools
-Onetestic - https://getonetastic.com/
+Onetestic - https://getonetastic.com/docs/
 
 
 Visual Studio Community - https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx
