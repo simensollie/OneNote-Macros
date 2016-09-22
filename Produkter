@@ -1,13 +1,152 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Macro name="Produkter" category="Prosjekt" description="Angi hvilke produkter kunden har kjøpt." publishDate="00-00-00T00:00:00.000Z" version="12">
-  <Expression>$dialog_box = DialogBox_Create("")</Expression>
+  <Comment text="DropDownList Array" />
   <Expression>$pakker = Array("START", "PLUSS", "PROFF", "PREMIUM")</Expression>
-  <Expression>DialogBox_AddDropDown($dialog_box, "&amp;Pakke", "Pakke", "PROFF", $pakker)</Expression>
-  <Expression>DialogBox_AddTextBox($dialog_box, "&amp;Domene", "domene", "", true)</Expression>
-  <Expression>DialogBox_AddTextBox($dialog_box, "&amp;Epost", "epost", "", true)</Expression>
-  <Expression>DialogBox_AddTextBox($dialog_box, "&amp;Facebook", "facebook", "", true)</Expression>
+  <Comment text="Create Dialog Box" />
+  <Expression>$dialog_box = DialogBox_Create("")</Expression>
+  <Comment text="Add Dialog Box elements" />
+  <Expression>DialogBox_AddDropDown($dialog_box, "&amp;Pakke", "Pakke", "", $pakker)</Expression>
+  <Expression>DialogBox_AddTextBox($dialog_box, "&amp;Domene", "Domene", "", true)</Expression>
+  <Expression>DialogBox_AddTextBox($dialog_box, "&amp;Epost", "Epost", "", true)</Expression>
+  <Expression>DialogBox_AddTextBox($dialog_box, "&amp;Facebook", "Facebook", "", true)</Expression>
+  <Comment text="Execute / show Dialog Box" />
   <Expression>DialogBox_Show($dialog_box)</Expression>
+  <Comment text="////////////////////////////////////" />
+  <Comment text="Create table and insert values based on input" />
+  <Comment text="////////////////////////////////////" />
+  <Comment text="Create table" />
+  <Expression>$Page = GetCurrentPage()</Expression>
+  <Expression>$Outline = InsertObject($Page, "Outline", 0)</Expression>
+  <Expression>$Table = InsertObject($Outline, "Table", -1)</Expression>
+  <Expression>$Row = InsertObject($Table, "Row", -1)</Expression>
+  <Comment text="Insert headers" />
+  <Comment text="Insert headers - Col 1" />
+  <Expression>$Cell = InsertObject($Row, "Cell", -1)</Expression>
+  <Expression>$Paragraph = InsertObject($Cell, "Paragraph", -1)</Expression>
+  <Expression>$Text = InsertObject($Paragraph, "Text", -1)</Expression>
+  <Expression>$Text.value = "Produkt"</Expression>
+  <Expression>$Text.bold = true</Expression>
+  <Comment text="Insert headers - Col 2" />
+  <Expression>$Cell = InsertObject($Row, "Cell", -1)</Expression>
+  <Expression>$Paragraph = InsertObject($Cell, "Paragraph", -1)</Expression>
+  <Expression>$Text = InsertObject($Paragraph, "Text", -1)</Expression>
+  <Expression>$Text.value = "Etablering"</Expression>
+  <Expression>$Text.bold = true</Expression>
+  <Comment text="Insert headers - Col 3" />
+  <Expression>$Cell = InsertObject($Row, "Cell", -1)</Expression>
+  <Expression>$Paragraph = InsertObject($Cell, "Paragraph", -1)</Expression>
+  <Expression>$Text = InsertObject($Paragraph, "Text", -1)</Expression>
+  <Expression>$Text.value = "Pr mnd"</Expression>
+  <Expression>$Text.bold = true</Expression>
+  <Comment text="Insert values based on input" />
+  <Expression>$pakkeValue = $dialog_box.controls["Pakke"]</Expression>
   <ForEach var="pakke">
     <Array>$pakker</Array>
+    <If>
+      <Condition>String_Equals($pakkeValue, $pakke, true)</Condition>
+      <Expression>$Row = InsertObject($Table, "Row", -1)</Expression>
+      <Comment text="Col 1" />
+      <Expression>$Cell = InsertObject($Row, "Cell", -1)</Expression>
+      <Expression>$Paragraph = InsertObject($Cell, "Paragraph", -1)</Expression>
+      <Expression>$Text = InsertObject($Paragraph, "Text", -1)</Expression>
+      <Expression>$Text.value = $pakke</Expression>
+      <Comment text="Col 2" />
+      <Expression>$Cell = InsertObject($Row, "Cell", -1)</Expression>
+      <Expression>$Paragraph = InsertObject($Cell, "Paragraph", -1)</Expression>
+      <Expression>$Text = InsertObject($Paragraph, "Text", -1)</Expression>
+      <If>
+        <Condition>String_Equals($pakke, "PREMIUM", true)</Condition>
+        <Expression>$Text.value = "15500,-"</Expression>
+      </If>
+      <If>
+        <Condition>String_Equals($pakke, "PROFF", true)</Condition>
+        <Expression>$Text.value = "12500,-"</Expression>
+      </If>
+      <If>
+        <Condition>String_Equals($pakke, "PLUSS", true)</Condition>
+        <Expression>$Text.value = "8500,-"</Expression>
+      </If>
+      <If>
+        <Condition>String_Equals($pakke, "START", true)</Condition>
+        <Expression>$Text.value = "4900,-"</Expression>
+      </If>
+      <Comment text="Col 3" />
+      <Expression>$Cell = InsertObject($Row, "Cell", -1)</Expression>
+      <Expression>$Paragraph = InsertObject($Cell, "Paragraph", -1)</Expression>
+      <Expression>$Text = InsertObject($Paragraph, "Text", -1)</Expression>
+      <If>
+        <Condition>String_Equals($pakke, "PREMIUM", true)</Condition>
+        <Expression>$Text.value = "490,-"</Expression>
+      </If>
+      <If>
+        <Condition>String_Equals($pakke, "PROFF", true)</Condition>
+        <Expression>$Text.value = "390,-"</Expression>
+      </If>
+      <If>
+        <Condition>String_Equals($pakke, "PLUSS", true)</Condition>
+        <Expression>$Text.value = "290,-"</Expression>
+      </If>
+      <If>
+        <Condition>String_Equals($pakke, "START", true)</Condition>
+        <Expression>$Text.value = "249,-"</Expression>
+      </If>
+    </If>
   </ForEach>
+  <Comment text="/////////////////////////////////////////" />
+  <Comment text="If there is value in textfield," />
+  <Comment text="insert row with name and value" />
+  <Comment text="/////////////////////////////////////////" />
+  <Comment text="Domene" />
+  <Expression>$domeneValue = $dialog_box.controls["Domene"]</Expression>
+  <If>
+    <Condition>String_DoesNotEqual($domeneValue, "", true)</Condition>
+    <Expression>$Row = InsertObject($Table, "Row", -1)</Expression>
+    <Comment text="Col 1" />
+    <Expression>$Cell = InsertObject($Row, "Cell", -1)</Expression>
+    <Expression>$Paragraph = InsertObject($Cell, "Paragraph", -1)</Expression>
+    <Expression>$Text = InsertObject($Paragraph, "Text", -1)</Expression>
+    <Expression>$Text.value = "Domene"</Expression>
+    <Comment text="Col 2" />
+    <Expression>$Cell = InsertObject($Row, "Cell", -1)</Expression>
+    <Expression>$Paragraph = InsertObject($Cell, "Paragraph", -1)</Expression>
+    <Expression>$Text = InsertObject($Paragraph, "Text", -1)</Expression>
+    <Expression>$Text.value = ($domeneValue + ",-")</Expression>
+  </If>
+  <Comment text="Epost" />
+  <Expression>$epostValue = $dialog_box.controls["Epost"]</Expression>
+  <If>
+    <Condition>String_DoesNotEqual($epostValue, "", true)</Condition>
+    <Expression>$Row = InsertObject($Table, "Row", -1)</Expression>
+    <Comment text="Col 1" />
+    <Expression>$Cell = InsertObject($Row, "Cell", -1)</Expression>
+    <Expression>$Paragraph = InsertObject($Cell, "Paragraph", -1)</Expression>
+    <Expression>$Text = InsertObject($Paragraph, "Text", -1)</Expression>
+    <Expression>$Text.value = "Epost"</Expression>
+    <Comment text="Col 2" />
+    <Expression>$Cell = InsertObject($Row, "Cell", -1)</Expression>
+    <Expression>$Paragraph = InsertObject($Cell, "Paragraph", -1)</Expression>
+    <Expression>$Text = InsertObject($Paragraph, "Text", -1)</Expression>
+    <Expression>$Text.value = " "</Expression>
+    <Comment text="Col 3" />
+    <Expression>$Cell = InsertObject($Row, "Cell", -1)</Expression>
+    <Expression>$Paragraph = InsertObject($Cell, "Paragraph", -1)</Expression>
+    <Expression>$Text = InsertObject($Paragraph, "Text", -1)</Expression>
+    <Expression>$Text.value = ($epostValue + ",-")</Expression>
+  </If>
+  <Comment text="Facebook" />
+  <Expression>$facebookValue = $dialog_box.controls["Facebook"]</Expression>
+  <If>
+    <Condition>String_DoesNotEqual($facebookValue, "", true)</Condition>
+    <Expression>$Row = InsertObject($Table, "Row", -1)</Expression>
+    <Comment text="Col 1" />
+    <Expression>$Cell = InsertObject($Row, "Cell", -1)</Expression>
+    <Expression>$Paragraph = InsertObject($Cell, "Paragraph", -1)</Expression>
+    <Expression>$Text = InsertObject($Paragraph, "Text", -1)</Expression>
+    <Expression>$Text.value = "Facebook"</Expression>
+    <Comment text="Col 2" />
+    <Expression>$Cell = InsertObject($Row, "Cell", -1)</Expression>
+    <Expression>$Paragraph = InsertObject($Cell, "Paragraph", -1)</Expression>
+    <Expression>$Text = InsertObject($Paragraph, "Text", -1)</Expression>
+    <Expression>$Text.value = ($facebookValue + ",-")</Expression>
+  </If>
 </Macro>
