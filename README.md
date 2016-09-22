@@ -3,8 +3,12 @@ Macros for OneNote
 ### Tools
 **Onetestic**
 https://getonetastic.com/
+
+
 **Visual Studio Community**
 https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx
+
+
 **Visual Basic Programming Language**
 https://msdn.microsoft.com/en-us/library/xk24xdbe(v=vs.100).aspx
 
