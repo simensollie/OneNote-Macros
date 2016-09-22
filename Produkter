@@ -3,5 +3,11 @@
   <Expression>$dialog_box = DialogBox_Create("")</Expression>
   <Expression>$pakker = Array("START", "PLUSS", "PROFF", "PREMIUM")</Expression>
   <Expression>DialogBox_AddDropDown($dialog_box, "&amp;Pakke", "Pakke", "PROFF", $pakker)</Expression>
+  <Expression>DialogBox_AddTextBox($dialog_box, "&amp;Domene", "domene", "", true)</Expression>
+  <Expression>DialogBox_AddTextBox($dialog_box, "&amp;Epost", "epost", "", true)</Expression>
+  <Expression>DialogBox_AddTextBox($dialog_box, "&amp;Facebook", "facebook", "", true)</Expression>
   <Expression>DialogBox_Show($dialog_box)</Expression>
+  <ForEach var="pakke">
+    <Array>$pakker</Array>
+  </ForEach>
 </Macro>
