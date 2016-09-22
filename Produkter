@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Macro name="Produkter" category="Prosjekt" description="Angi hvilke produkter kunden har kjøpt." publishDate="00-00-00T00:00:00.000Z" version="12">
+  <Expression>$dialog_box = DialogBox_Create("")</Expression>
+  <Expression>$pakker = Array("START", "PLUSS", "PROFF", "PREMIUM")</Expression>
+  <Expression>DialogBox_AddDropDown($dialog_box, "&amp;Pakke", "Pakke", "PROFF", $pakker)</Expression>
+  <Expression>DialogBox_Show($dialog_box)</Expression>
+</Macro>
